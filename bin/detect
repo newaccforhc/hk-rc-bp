@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# this pack is valid for all apps
+echo "RC_1.53.0_Amd64"
+exit 0
