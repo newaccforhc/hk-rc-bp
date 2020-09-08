@@ -6,11 +6,12 @@ indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> Install rc"
+###### install Rc ##########
+echo "-----> Installing rc"
 BUILD_DIR=$1
 CACHE_DIR=$2
 VENDOR_DIR="vendor"
-FILE="rc1.53.0.zip.zip"
+FILE="rc1.53.0.zip"
 DOWNLOAD_URL="https://github.com/newaccforhc/file-dump-junk/raw/master/rc1.53.0.zip"
 
 mkdir -p "$CACHE_DIR"
@@ -28,21 +29,23 @@ else
   fi
 fi
 
-cd $BUILD_DIR
-mkdir -p $VENDOR_DIR
-cd $VENDOR_DIR
+cd "$BUILD_DIR"
+mkdir -p "$VENDOR_DIR"
+cd "$VENDOR_DIR"
 mkdir -p rclone
 cd rclone
 cp "$CACHE_DIR/$FILE" .
-unzip -qqj $FILE.zip
-rm -rf $FILE.zip
+unzip -qqj "$FILE"
+rm -rf "$FILE"
 chmod 777 rclone
 
 echo "exporting PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/rclone.sh"
-mkdir -p $(dirname $PROFILE_PATH)
+mkdir -p "$(dirname "$PROFILE_PATH")"
 echo 'export PATH="$PATH:${HOME}/vendor/rclone"' >> $PROFILE_PATH
-echo "Rclone installed"  | indent
+echo "Rc installed"  | indent
+
+#### moving conf ########
 
 echo 'export LANG=zh_CN.UTF-8' >> $PROFILE_PATH
 mkdir -p "$BUILD_DIR"/.profile.d
